@@ -2,24 +2,33 @@
 {
     internal class Program
     {
-        public static void InsertionSort(int[] nums)
+        public static void ColorSort(int[] nums)
         {
-            for (int i = 1; i < nums.Length; i++)
+            int red0 = 0;
+            int white1 = 0;
+            int blue2 = 0;
+
+            foreach (var num in nums)
             {
-                int key = nums[i];
-                int j = i - 1;
-                while (j >= 0 && nums[j] > key)
-                {
-                    nums[j + 1] = nums[j];
-                    j--;
-                }
-                nums[j + 1] = key;
+                if (num == 0) red0++;
+                else if (num == 1) white1++;
+                else if (num == 2) blue2++;
+            }
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (i < red0)
+                    nums[i] = 0;
+                else if (i < red0 + white1)
+                    nums[i] = 1;
+                else
+                    nums[i] = 2;
             }
         }
         static void Main(string[] args)
         {
-            int[] numbers = { 2, 0, 1  };
-            InsertionSort(numbers);
+            int[] numbers = { 2, 0, 1 , 0 , 2, 2, 1, 0 };
+            ColorSort(numbers);
             Console.WriteLine(string.Join(", ", numbers));
         }
     }
